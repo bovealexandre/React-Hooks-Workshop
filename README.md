@@ -44,7 +44,9 @@ export default () => {
 }
 ```
 
-Voilà, vous êtes prêts à écrire votre premier hook react. Pensez à créer un objet avec un titre à passer en argument du hook.
+Voilà, vous êtes prêts à écrire votre premier hook react.
+
+Pensez à créer un objet avec un titre à passer en argument du hook.
 ```javascript
 const [state, setState] = useState();
 ```
@@ -115,7 +117,9 @@ export default () => {
 
 ### 2. Ajout / Suppression
 Maintenant qu'on sait afficher une liste de tâches, il faudrait pouvoir la complèter.
+
 Créez un nouveau fichier javascript au même niveau qu'App.js puis importez-y react et le useState.
+
 Procédez de la même façon que pour l'app mais en passant les `props` en argument à votre fonction et affichez un formulaire dans le `return()` qui vous permettra de saisir l'intitulé de la nouvelle tâche.
 
 <details>
@@ -150,7 +154,9 @@ puis ajoutez le à vos balises HTML dans le `return()` avant le `tasks.map()`.
 <AddToDo addTask={addTask}/>
 ```
 
-Votre component AddTask est maintenant un enfant de votre component App et peut donc recevoir ses *props* (ce qu'on a mis en argument un peu plus haut). Les props sont bien pratiques car on peut s'en servir pour passer beaucoup de choses d'un component à un autre. Dans notre cas, on voudrait passer une fonction `addTask` qui permettra de changer le state de notre App.
+Votre component AddTask est maintenant un enfant de votre component App et peut donc recevoir ses *props* (ce qu'on a mis en argument un peu plus haut).
+
+Les props sont bien pratiques car on peut s'en servir pour passer beaucoup de choses d'un component à un autre. Dans notre cas, on voudrait passer une fonction `addTask` qui permettra de changer le state de notre App.
 
 <details>
 <summary>Solution</summary>
@@ -169,9 +175,10 @@ const addTask = (newTask) => {
 Maintenant, retournons dans le component AddTask où vous allez avoir besoin d'une fonction `onChange()` qui se chargera de mettre à jour dans le state les données saisies dans le formulaire et d'une `onSubmit()` qui gèrera leur envoi.
 
 <details>
-<summary>Solution AddTask</summary>
+<summary>Solution </summary>
 
 ```javascript
+//AddTask.js
 import React, { useState } from 'react';
 
 export default (props) => {
@@ -197,12 +204,8 @@ export default (props) => {
     </>
   )
 }
-```
-</details>
-<details>
-<summary>Solution App</summary>
 
-```javascript
+//App.js
 import React, { useState } from 'react';
 import uuid from 'uuid';
 
@@ -244,7 +247,7 @@ export default () => {
 
 Pour la suppression c'est *un peu plus simple*, il faut écrire une fonction qui en prenant un id comme argument va retourner le tableau de tâches actuels moins celle à supprimer.
 <details>
-<summary>Solution App</summary>
+<summary>Solution</summary>
 
 ```javascript
 import React, { useState } from 'react';
@@ -293,6 +296,7 @@ export default () => {
 
 ### 3. Propsons nous dans les bois...
 Maintenant qu'on a une vraie app qui nous permet d'afficher, ajouter et supprimer des tâches, il est temps de faire un peu de ménage. On a parlé brièvement des props et des components plus tôt dans ce workshop.
+
 Un des avantages principaux de l'utilisation de components en développement web est de pouvoir fractionner la circulation d'information et permettre de mettre localement à jour des éléments au sein d'une page sans entraîner de modification sur le reste de celle-ci.
 ```javascript
 <AddToDo addTask={addTask}/>
@@ -304,7 +308,9 @@ props.addTask(newTask);
 //Exemple d'utilisation d'un props
 ```
 Afin de profiter au mieux de cette logique de components, créons un nouveau fichier que nous allons importer dans App.
+
 Dans le `return()` de notre App, effacez le `tasks.map()` et appelez-y à la place votre nouveau component en propsant le state `tasks`.
+
 Dans le `return()` ce nouveau component, mappez le props et affichez les titres.
 <details>
 <summary>Solution</summary>
@@ -364,6 +370,7 @@ export default (props) => {
 ```
 </details>
 Ne nous arrêtons pas en si bon chemin. Créons encore un nouveau component qui se chargera uniquement d'afficher le titre d'une tâche et qui sera appelé par le component auquel nous venons d'assigner la responsabilité du mappage.
+
 Une fois celà fait, il ne reste plus qu'à propser la fonction de suppression en bout de chaîne afin que chaque tâche puisse décider de son propre sort.
 <details>
 <summary>Solution</summary>
@@ -436,20 +443,23 @@ export default (props) => {
 ```
 </details>
 
-Il - reste encore une chose à rajouter, des cases à cocher pour faire une vraie checklist.
+Il reste encore une chose à rajouter, des cases à cocher pour faire une vraie checklist.
 <details>
 <summary>Solution</summary>
 Je vous laisse chercher la solution, il est tard et j'ai sommeil ;)
+
 Pensez juste à ajouter un boolean à vos objets et propsez une fonction qui gèrera la transition des inputs.
 </details>
 
 ### 4. Utilisation du hooks useEffect
 Maintenant qu'on a une app avec une belle checklist il ne manque plus qu'une seule chose, un compteur qui permet de savoir combien de tâches ont déjà été réalisées.
+
 Pour celà, on va se servir d'un nouveau hook, le *useEffect*. Ce hook permet d'effectuer des actions prédéfinies à des moments clés de la vie d'un component, les *life cycles*. C'est ce qui permet de ne mettre à jour que des portions de votre page et rend ce mode de développement aussi efficace.
 ```javascript
 useEffect(()=>{/*votre fonction*/}, [/*un tableau d'éléments à surveiller*/])
 ```
 Commencez par importer `useEffect` à la suite de `useState`.
+
 Il va vous falloir un nouveau state qui gardera une trace de nombre de tâches cochées.
 <details>
 <summary>Solution</summary>
@@ -527,3 +537,5 @@ export default () => {
 }
 ```
 </details>
+
+Voilà, c'est terminé. Je vais dormir.
