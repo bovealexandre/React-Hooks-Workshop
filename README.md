@@ -8,23 +8,23 @@ npm install -g create-react-app
 ```
 
 pour créer un nouveau projet
-```bash
+```
 create-react-app <name-of-app>
 ```
 
 remplacez <name-of-app> par le nom du fichier dans lequel vous voulez le projet.
 
 Pour faire tourner l'app, rentrez dans le fichier nouvellement créé
-```bash
+```
 cd <name-of-app>
 ```
 et lancez l'app avec
-```bash
+```
 npm start
 ```
 
 Pour les besoins du projet, installez aussi uuid
-```bash
+```
 npm install uuid --save
 ```
 
@@ -108,6 +108,7 @@ export default () => {
 }
 ```
 </details>
+
 ### 2. Ajout / Suppression
 ### 3. Propsons nous dans les bois...
 ### 4. Utilisation du hooks useEffect
