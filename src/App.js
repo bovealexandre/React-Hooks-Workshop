@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState, useEffect} from 'react';
+import uuid from 'uuid';
+
+import AddToDo from './AddToDo'
+import ToDos from './ToDos'
 import './App.css';
 
-function App() {
+export default () =>{
+  const [toDos, setToDos] = useState([]);
+  const [toDosRemaining, setToDosRemaining] = useState(0);
+
+
+  function addToDo(title){
+    const newTodo = {
+      id: uuid.v4(),
+      title,
+      completed: false
+    }
+    setToDos([...toDos, newTodo]);
+  }
+
+  function toggleCompletion(id){
+    setToDos(toDos.map(toDo => {
+          if(toDo.id === id) {
+            toDo.completed = !toDo.completed
+          }
+          return toDo;
+        }));
+  }
+
+  function delToDo(id){
+    setToDos([...toDos.filter(todo => todo.id !== id)])  
+  }
+
+  useEffect(() => { setToDosRemaining(toDos.filter(task => !task.completed).length) }, [toDos]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddToDo addTodo={addToDo} />
+      <div>
+        To Dos Remaining : {toDosRemaining} / {toDos.length}
+      </div>
+      <ToDos todos={toDos} toggleCompletion={toggleCompletion} delTodo={delToDo} />
     </div>
   );
 }
-
-export default App;
